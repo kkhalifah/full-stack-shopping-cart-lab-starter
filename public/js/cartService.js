@@ -3,7 +3,7 @@ app.service("cartService", function($http) {
 
     // Call the Node Server API to get all the items. Return a promise that
     // resolves to an array of products. (The promise should NOT resolve to the
-    // entire response object.)
+    // entire response object.
 
         this.getAllItems = function() {
         // GET /api/items
@@ -13,7 +13,18 @@ app.service("cartService", function($http) {
           return response.data;
         });
       };
-
+//notes another way to write: 18-28
+//  this.getAllItems=function(){
+//response object
+  //  var responsePromise = $http.get('api/items');
+//new promise decide what to put in object
+  //   var dataPromise = responsePromise.then(function(response){
+  //     return response;
+  //   })
+  //   dataPromise.then(function(x){
+  //     console.log(x);
+  //   })
+  // };
     // Call the Node Server API to add an item.
     // The item parameter will be an object, for example:
     // { product: "Apples", price: 1.89 }
@@ -22,7 +33,7 @@ app.service("cartService", function($http) {
     this.addItem = function(item) {
         // POST /api/items
         // body -> { product: "...", price: ... }
-        return $http.post("/api/items/" , {product: item.product, price: item.price}).then(function(response){
+        return $http.post("/api/items/" , {product: item.product, price: item.price, quantity: item.quantity, total: item.total}).then(function(response){
           return response.data;
         })
         // TODO Make the HTTP request to the server and return a promise.

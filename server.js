@@ -31,9 +31,9 @@ app.get('/api/items', function(req, res) {
 // TODO Handle this URL with appropriate Database interaction.
 app.post('/api/items', function(req, res) {
     var item = req.body; // <-- Get the parsed JSON body
-    var sql = "INSERT INTO shoppingcart(product, price) " +
-              "VALUES ($1::text, $2::float)";
-    var values = [item.product, item.price];
+    var sql = "INSERT INTO shoppingcart(product, price, quantity, total) " +
+              "VALUES ($1::text, $2::float, $3::smallint, $4::float)";
+    var values = [item.product, item.price, item.quantity];
 
     pool.query(sql, values).then(function() {
         res.status(201); // 201 Created
